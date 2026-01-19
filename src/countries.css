@@ -1,30 +1,32 @@
-.card1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  border-radius: 4px;
-  height: 200px;
-  width: 200px;
-  gap: 4px;
-}
-
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.searchContainer {
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
-.searchInput {
-  width: 300px;
-  padding: 8px 12px;
-  font-size: 16px;
+.countriesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.countryCard {
+  width: 160px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
+}
+
+.countryCard img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.countryCard p {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }

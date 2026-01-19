@@ -1,56 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "./countries.css";
-
-const Card = ({ png, common }) => {
-  return (
-    <div className="card1">
-      <img src={png} alt={common} style={{ width: "100px" }} />
-      <h2>{common}</h2>
-    </div>
-  );
-};
-
+//....
 export default function Countries() {
   const [countries, setCountries] = useState([]);
   const [searchText, setSearchText] = useState("");
-  
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const res = await fetch(
-          "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries"
-        );
-        const json = await res.json();
-        setCountries(json);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
 
-    fetchCountries();
+  useEffect(() => {
+    fetch("https://countries-search-data-prod-812920491762.asia-south1.run.app/countries")
+      .then((res) => res.json())
+      .then((data) => setCountries(data))
+      .catch((error) => console.error(error));
   }, []);
 
-  const filteredCountries = countries.filter((item) =>
-    item.common.toLowerCase().includes(searchText.toLowerCase())
+  const filteredCountries = countries.filter((country) =>
+    country.common.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
-    <>
-      <div className="searchContainer">
+    <div>
+      <div className="container">
         <input
           type="text"
-          placeholder="Search for countries..."
-          className="searchInput"
+          placeholder="Search for countries"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
 
-      <div className="container">
-        {filteredCountries.map((item) => (
-          <Card key={item.common} common={item.common} png={item.png} />
+      <div className="countriesContainer">
+        {filteredCountries.map((country) => (
+          <div className="countryCard" key={country.common}>
+            <img src={country.png} alt={country.common} />
+            <p>{country.common}</p>
+          </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
